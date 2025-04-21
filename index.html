@@ -40,14 +40,7 @@
 	</div>
 
     <!-- Optional: Display messages from PHP -->
-    <?php
-        session_start(); // Start session to access messages
-        if (isset($_SESSION['message'])) {
-            echo '<p style="color: ' . ($_SESSION['message_type'] ?? 'red') . '; text-align: center; margin-top: 10px;">' . htmlspecialchars($_SESSION['message']) . '</p>';
-            unset($_SESSION['message']); // Clear the message after displaying
-            unset($_SESSION['message_type']);
-        }
-    ?>
+
     <!-- If you put PHP in HTML, save the file as .php (e.g., index.php) -->
 
 </body>
