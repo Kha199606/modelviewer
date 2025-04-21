@@ -15,6 +15,35 @@
 	<link rel="stylesheet" type="text/css" href="slide navbar style.css">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
+
+<script>
+	document.getElementById("loginForm").addEventListener("submit", async function (e) {
+	  e.preventDefault();
+  
+	  const email = document.getElementById("loginEmail").value;
+	  const password = document.getElementById("loginPassword").value;
+  
+	  const response = await fetch("http://localhost:3000/api/auth/login", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({
+		  username: email,  // sử dụng email như username
+		  password: password
+		}),
+	  });
+  
+	  const data = await response.json();
+	  if (data.success) {
+		localStorage.setItem("userId", data.userId);
+		alert("Đăng nhập thành công!");
+		// chuyển tới dashboard thực sự
+		window.location.href = "editor.html";
+	  } else {
+		alert("Đăng nhập thất bại!");
+	  }
+	});
+  </script>
+
 <body>
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
@@ -30,11 +59,11 @@
 			</div>
 
 			<div class="login">
-				<form>
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Login</button>
+				<form id="loginForm">
+				  <label for="chk" aria-hidden="true">Login</label>
+				  <input type="email" id="loginEmail" placeholder="Email" required>
+				  <input type="password" id="loginPassword" placeholder="Password" required>
+				  <button type="submit">Login</button>
 				</form>
 			</div>
 	</div>
